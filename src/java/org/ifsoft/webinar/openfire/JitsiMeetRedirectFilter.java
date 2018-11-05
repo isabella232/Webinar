@@ -105,7 +105,10 @@ public class JitsiMeetRedirectFilter implements Filter
             else
             {
                 Log.trace( "Forwarding " + request.getRequestURI() + " to /" );
-                RequestDispatcher dispatcher = request.getRequestDispatcher( "/" );
+                String path = "/";
+                String query = request.getQueryString();
+                if (query != null) path += "?" + query;
+                RequestDispatcher dispatcher = request.getRequestDispatcher( path );
                 dispatcher.forward( request, response );
                 return;
             }

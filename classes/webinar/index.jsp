@@ -15,7 +15,17 @@
     <link rel="stylesheet" href="css/all.css?v=3084">
 
     <script>
-        var  webinarPresenter = false;
+        function urlParam(name)
+        {
+            var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (!results) { return undefined; }
+            return unescape(results[1] || undefined);
+        };   
+        
+        var confMode = urlParam("mode");
+        if (!confMode) confMode = "attendee";
+        
+        var webinarPresenter = confMode != "attendee"     
 
         var config = {
             hosts: {
@@ -65,7 +75,7 @@
             DESKTOP_SHARING_BUTTON_DISABLED_TOOLTIP: null,
             INITIAL_TOOLBAR_TIMEOUT: 20000,
             TOOLBAR_TIMEOUT: 4000,
-            DEFAULT_REMOTE_DISPLAY_NAME: 'Presenter',
+            DEFAULT_REMOTE_DISPLAY_NAME: 'Participant',
             DEFAULT_LOCAL_DISPLAY_NAME: 'me',
             SHOW_JITSI_WATERMARK: false,
             JITSI_WATERMARK_LINK: 'http://igniterealtime.org',
@@ -77,8 +87,8 @@
             SHOW_DEEP_LINKING_IMAGE: false,
             GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
             DISPLAY_WELCOME_PAGE_CONTENT: true,
-            APP_NAME: 'Webinar Presenter',
-            NATIVE_APP_NAME: 'Webinar',
+            APP_NAME: 'Openfire Meetings',
+            NATIVE_APP_NAME: 'Openfire Meetings',
             LANG_DETECTION: false, // Allow i18n to detect the system language
             INVITATION_POWERED_BY: true,
 
@@ -86,7 +96,7 @@
 
             TOOLBAR_BUTTONS: [
                 'fullscreen', 'fodeviceselection', 'hangup', 'profile', 'info', 'chat',
-                'settings', 'videoquality', 'feedback', 'stats', 'shortcuts'
+                'settings', 'videoquality', 'feedback', 'stats', 'shortcuts', 'raisehand'                          
             ],
 
             SETTINGS_SECTIONS: [ 'language', 'moderator', 'profile', 'calendar' ],
@@ -98,7 +108,7 @@
             CLOSE_PAGE_GUEST_HINT: false,
             RANDOM_AVATAR_URL_PREFIX: false,
             RANDOM_AVATAR_URL_SUFFIX: false,
-            FILM_STRIP_MAX_HEIGHT: 0,
+            FILM_STRIP_MAX_HEIGHT: confMode == "attendee" ? 0 : 100,
 
             ENABLE_FEEDBACK_ANIMATION: false,
             DISABLE_FOCUS_INDICATOR: false,
@@ -123,6 +133,7 @@
         };
 
         var OFMEET_CONFIG = {
+            mode: confMode,
             showSharedCursor: true,
             hostname: "<%= hostname %>",
             domain: "<%= domain%>",
@@ -131,6 +142,19 @@
                 return '<iframe src=' + url + ' id="ofmeet-content" style="width: 100%; height: 100%; border: 0;padding-left: 0px; padding-top: 0px;">';
             },
         };
+        
+        if (confMode != "attendee")
+        {
+            interfaceConfig.TOOLBAR_BUTTONS.push('camera');
+            interfaceConfig.TOOLBAR_BUTTONS.push('microphone');
+            interfaceConfig.TOOLBAR_BUTTONS.push('desktop');    
+            interfaceConfig.TOOLBAR_BUTTONS.push('livestreaming');     
+            interfaceConfig.TOOLBAR_BUTTONS.push('sharedvideo');    
+            interfaceConfig.TOOLBAR_BUTTONS.push('filmstrip');    
+            interfaceConfig.TOOLBAR_BUTTONS.push('raisehand');  
+            interfaceConfig.TOOLBAR_BUTTONS.push('invite');    
+            interfaceConfig.TOOLBAR_BUTTONS.push('tileview');    
+        }
     </script>
 
     <script src="libs/do_external_connect.min.js"></script>
