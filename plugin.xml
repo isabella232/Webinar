@@ -3,7 +3,7 @@
     <author>Ignite Realtime</author>
     <class>org.ifsoft.webinar.openfire.PluginImpl</class>
     <name>Webinar</name>
-    <description>Web Diagramming Tool that uses SVG and HTML for rendering</description>
+    <description>Webinar Plugin for Openfire Meetings</description>
     <licenseType>Apache 2.0</licenseType>
     <version>0.0.1</version>
     <date>10/21/2018</date>
