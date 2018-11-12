@@ -6,11 +6,11 @@
     <description>Webinar Plugin for Openfire Meetings</description>
     <licenseType>Apache 2.0</licenseType>
     <version>0.0.1</version>
-    <date>10/21/2018</date>
+    <date>11/12/2018</date>
     <minServerVersion>4.0.0</minServerVersion>
 
    <adminconsole>
-        <tab id="tab-webclients">
+        <tab id="tab-webclients"  name="${admin.sidebar.webclients.name}" description="${admin.sidebar.webclients.description}" url="webinar.jsp">
             <sidebar id="siderbar-webinar" name="${plugin.title}" description="${plugin.title.description}" >
                 <item id="webinar-settings" name="${config.page.settings}" description="${config.page.settings.description}" url="webinar.jsp"/>
             </sidebar>
