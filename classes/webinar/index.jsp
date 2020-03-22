@@ -1,7 +1,7 @@
 <%@ page import="org.jivesoftware.util.*, org.jivesoftware.openfire.*, java.util.*" %>
 <%
     String hostname = request.getServerName();           
-    int port = request.getServerPort();
+    String port = JiveGlobals.getProperty("httpbind.port.secure", "7443");    
     String domain = XMPPServer.getInstance().getServerInfo().getXMPPDomain();    
 
     String wssUrl = "wss://" + hostname + ":" + port + "/ws/";
