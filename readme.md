@@ -1,3 +1,6 @@
+# DEPRECATED
+This project has been been absorbed into the [Pade plugin for openfire](https://github.com/igniterealtime/openfire-pade-plugin) project
+
 # About
 Webinar plugin for Openfire is a customised version of Jitsi-Meet in Openfire Meetings for Webinars.
 
